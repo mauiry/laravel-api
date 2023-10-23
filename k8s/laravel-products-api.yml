@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dbconfigmap
+data:
+  DB_PORT: "3306"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dbsecrets
+type: Opaque
+data:
+  DB_HOST: MzQuMTMyLjE2NS4yMzQ=
+  DB_USERNAME: aHV0
+  DB_PASSWORD: MTIz
+  DB_DATABASE: aW52ZW50YXJpbw==
+---
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: laravel-products-api
+  namespace: default 
+  labels:
+    app: laravel-products-api
+spec:
+  revisionHistoryLimit: 2 
+  strategy:
+    type: RollingUpdate 
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: laravel-products-api
+  template: 
+    metadata:
+      labels: 
+        app: laravel-products-api
+    spec:
+      containers:
+      - name: laravel-products-api
+        image: ualmtorres/laravel-products-api:v0 
+        ports:
+        - name: http
+          containerPort: 8000
+        env:
+          - name: DB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: dbconfigmap
+                key: DB_PORT
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: DB_HOST
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: DB_USERNAME
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: DB_PASSWORD
+          - name: DB_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: dbsecrets
+                key: DB_DATABASE
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: laravel-products-api 
+  namespace: default 
+spec:
+  type: LoadBalancer 
+  ports:
+  - name: http
+    port: 8000
+    targetPort: http
+  selector:
+    app: laravel-products-api
