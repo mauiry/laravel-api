@@ -2,6 +2,10 @@
 
 Veremos cómo crear una API de gestión de productos en Laravel usando un entorno de desarrollo en Docker. El entorno estará formado por el framework Laravel y una base de datos MySQL. A continuación veremos cómo empaquetarla en una imagen Docker, que subiremos a Docker Hub. Por último, la desplegaremos en un cluster de Kubernetes y veremos cómo realizar una actualización.
 
+> **NOTA**
+>
+> Videotutoriales disponibles en [lista de reproducción YouTube](https://www.youtube.com/playlist?list=PLoS04oY1FHPNdxLM1PM5_FqhwZqyD_AMQ). Consulta preferentemente los de _Nuevas explicaciones_.
+
 ## Endpoints de la API
 
 * `GET api/product`
@@ -199,3 +203,4 @@ Actualizaremos el despliegue por dos motivos: actualización del código de la A
 ## Enlaces de interés
 
 * [docker-compose.yml para MariaDB y Laravel de Bitnami](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml)
+* [Lista de reproducción YouTube](https://www.youtube.com/playlist?list=PLoS04oY1FHPNdxLM1PM5_FqhwZqyD_AMQ). 
