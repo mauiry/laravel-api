@@ -1,11 +1,8 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
 version: "2"
 
 services:
   myapp:
-    image: ualmtorres/laravel-products-api:v0
+    image: mauixfull/laravel-inventario-api:v2
     ports:
       - "8000:8000"
     environment:

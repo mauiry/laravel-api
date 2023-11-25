@@ -1,6 +1,6 @@
 FROM docker.io/bitnami/laravel:10
 
-COPY ./my-project /app
+COPY ./app.posix /app
 
 ENV DB_HOST=${DB_HOST}
 ENV DB_PORT=${DB_PORT}
